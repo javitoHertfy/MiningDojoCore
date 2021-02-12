@@ -14,10 +14,10 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            iConfiguration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration iConfiguration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -27,7 +27,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
             services.AddDbContext<MinerDbContext>(options => options.UseInMemoryDatabase(databaseName: "MiningCondingDojo"));
 
             services
-                .AddRepository();
+                .AddRepository(iConfiguration);
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

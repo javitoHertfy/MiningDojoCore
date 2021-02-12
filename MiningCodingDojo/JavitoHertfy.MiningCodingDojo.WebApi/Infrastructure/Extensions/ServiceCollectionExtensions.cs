@@ -4,15 +4,15 @@ using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Implementatio
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Mappers.Contracts;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Mappers.Implementation;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Implementations;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Extensions
 {
     public static class InfrastrutureServiceCollectionExtensions
     {
-        public static IServiceCollection AddRepository(this IServiceCollection services)
-        {
-            services.AddSingleton<IMinerDbContext, MinerDbContext>();
+        public static IServiceCollection AddRepository(this IServiceCollection services, IConfiguration iConfiguration)
+        {            
             services.AddSingleton<IMinerRepository, MinerRepository>();
             services.AddSingleton<IMinerEntityMapper, MinerEntityMapper>();
 
