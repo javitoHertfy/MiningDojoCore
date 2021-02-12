@@ -10,8 +10,9 @@ export interface MinersState {
 }
 
 export interface Miner {
-    Name: string;
-    Quantity: number;
+    id: number
+    name: string;
+    quantity: number;
 }
 
 // -----------------
@@ -40,7 +41,7 @@ export const actionCreators = {
         // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
         if (appState && appState.miners) {
-            fetch(`api/miners`)
+            fetch(`api/miner`)
                 .then(response => response.json() as Promise<Miner[]>)
                 .then(data => {
                     dispatch({ type: 'RECEIVE_MINERS', miners: data });
