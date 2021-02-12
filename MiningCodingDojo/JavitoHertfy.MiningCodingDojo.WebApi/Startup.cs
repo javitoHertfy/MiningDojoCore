@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-
+using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Extensions;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi
 {
@@ -25,6 +25,9 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
             services.AddControllersWithViews();
 
             services.AddDbContext<MinerDbContext>(options => options.UseInMemoryDatabase(databaseName: "MiningCondingDojo"));
+
+            services
+                .AddRepository();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

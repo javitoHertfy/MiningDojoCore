@@ -1,4 +1,6 @@
-﻿using JavitoHertfy.MiningCodingDojo.WebApi.Api.Model.Response;
+﻿using JavitoHertfy.MiningCodingDojo.WebApi.Api.Model.Request;
+using JavitoHertfy.MiningCodingDojo.WebApi.Api.Model.Response;
+using JavitoHertfy.MiningCodingDojo.WebApi.Domain.Repository.Contracts;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.DbEntities;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Implementations;
 using Microsoft.AspNetCore.Mvc;
@@ -12,34 +14,38 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
     [Route("api/[controller]")]
     public class MinerController : ControllerBase
     {
-        private MinerDbContext context;
 
-        public MinerController(MinerDbContext context)
+        private MinerDbContext context;
+        private IMinerRepository iMinerRepository;
+
+        public MinerController(IMinerRepository iMinerRepository, MinerDbContext context)
         {
-            this.context = context;
+            this.iMinerRepository = iMinerRepository;
+            this.context = context; 
         }
         [HttpGet]
         public Task<IActionResult> Get()
         {
-            var miners = this.context.Miners;
+            var miners = iMinerRepository.GetAsync();
             return Task.FromResult<IActionResult>(Ok(miners));
 
         }
 
         [HttpPost]
-        public Task<IActionResult> Post(Miner miner)
+        public Task<IActionResult> Post(MinerRequest minerRequest)
         {
+            var miner = new Miner();
             //Determine the next ID
             var newID = context.Miners.Select(x => x.Id).Max() + 1;
             miner.Id = newID;
-            miner.Name = $"Miner_{newID}";
+            miner.Name = minerRequest.Name;
             miner.Quantity = 0;
 
             context.Miners.Add(miner);
             context.SaveChanges();
          
 
-            return Task.FromResult<IActionResult>(Ok());
+            return Task.FromResult<IActionResult>(Ok(miner));
         }
 
     }
