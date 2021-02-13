@@ -22,9 +22,9 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-
-            services.AddDbContext<MinerDbContext>(options => options.UseInMemoryDatabase(databaseName: "MiningCondingDojo"));
+            services
+                .AddControllersWithViews()
+                .AddControllersAsServices();           
 
             services
                 .AddRepository(iConfiguration);

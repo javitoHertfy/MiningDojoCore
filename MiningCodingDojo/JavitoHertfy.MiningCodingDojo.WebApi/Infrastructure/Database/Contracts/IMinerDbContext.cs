@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Contracts
 {
-    public interface IMinerDbContext
+    public interface IMinerDbContext: IDisposable
     {
         DbSet<Miner> Miners { get; set; }
+        Task<int> SaveContextChangesAsync();
 
     }
 }

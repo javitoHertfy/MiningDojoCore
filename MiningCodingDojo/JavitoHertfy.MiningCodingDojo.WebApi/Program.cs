@@ -1,4 +1,5 @@
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database;
+using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Contracts;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Implementations;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -16,13 +17,17 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
+            var iConfigurationRoot = new ConfigurationBuilder()
+              .AddEnvironmentVariables()
+              .AddUserSecrets<Program>(true)
+              .Build();
+
+            var host = CreateHostBuilder(args, iConfigurationRoot).Build();
 
             using (var scope = host.Services.CreateScope())
             {
                 //3. Get the instance of BoardGamesDBContext in our services layer
-                var services = scope.ServiceProvider;
-                var context = services.GetRequiredService<MinerDbContext>();
+                var services = scope.ServiceProvider;              
 
                 //4. Call the DataGenerator to create sample data
                 DataGenerator.Initialize(services);
@@ -32,8 +37,12 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
             host.Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        public static IHostBuilder CreateHostBuilder(string[] args, IConfigurationRoot iConfiguration) =>
             Host.CreateDefaultBuilder(args)
+                 .ConfigureAppConfiguration((context, builder) =>
+                 {
+                     builder.AddConfiguration(iConfiguration);                     
+                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

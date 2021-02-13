@@ -9,5 +9,9 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Domain.Repository.Contracts
     public interface IMinerRepository
     {
         Task<IEnumerable<MinerEntity>> GetAsync();
+
+        Task<MinerEntity> Insert(MinerEntity minerEntity);
+
+        Task<bool> Initialize();
     }
 }

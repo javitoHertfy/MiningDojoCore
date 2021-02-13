@@ -13,22 +13,53 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
 {
     public class MinerRepository : IMinerRepository
     {
-        private readonly IMinerDbContext iMinerDbContext;
+        private readonly IDatabaseFactory iDatabaseFactory;
         private readonly IMinerEntityMapper iMinerEntityMapper;
 
-        public MinerRepository(IMinerDbContext iMinerDbContext, IMinerEntityMapper iMinerEntityMapper)
+        public MinerRepository(IDatabaseFactory iDatabaseFactory, IMinerEntityMapper iMinerEntityMapper)
         {
 
-            this.iMinerDbContext = iMinerDbContext;
+            this.iDatabaseFactory = iDatabaseFactory;
             this.iMinerEntityMapper = iMinerEntityMapper;
         }
 
         public async Task<IEnumerable<MinerEntity>> GetAsync()
         {
-            var miners = await this.iMinerDbContext.Miners.AsQueryable().ToListAsync();            
+            using var context = this.iDatabaseFactory.GetDbContext();
+
+            var miners = await context.Miners.AsQueryable().ToListAsync();            
 
             var result = miners.Select(miner => this.iMinerEntityMapper.Convert(miner));
             return result;
+        }
+
+        public async Task<bool> Initialize()
+        {
+            try
+            {
+                using var context = this.iDatabaseFactory.GetDbContext();
+
+                context.Miners.AddRange(
+                  new Database.DbEntities.Miner
+                  {
+                      Id = 0,
+                      Name = "Javito Hertfy",
+                      Quantity = 0,
+                      Handicap = 0
+                  });
+
+                return await context.SaveContextChangesAsync() > 0;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            
+        }
+
+        public Task<MinerEntity> Insert(MinerEntity minerEntity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

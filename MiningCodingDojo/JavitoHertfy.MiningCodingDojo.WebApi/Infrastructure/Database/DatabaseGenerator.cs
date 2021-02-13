@@ -1,4 +1,6 @@
-﻿using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Implementations;
+﻿using JavitoHertfy.MiningCodingDojo.WebApi.Domain.Repository.Contracts;
+using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Contracts;
+using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Implementations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,26 +14,10 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new MinerDbContext(
-                serviceProvider.GetRequiredService<DbContextOptions<MinerDbContext>>()))
-            {
-                // Look for any board games.
-                if (context.Miners.Any())
-                {
-                    return;   // Data was already seeded
-                }
 
-                context.Miners.AddRange(
-                    new DbEntities.Miner
-                    {
-                       Id = 0,
-                       Name = "Javito Hertfy",
-                       Quantity = 0,
-                       Handicap = 0
-                    });
-
-                context.SaveChanges();
-            }
+            var repository = serviceProvider.GetRequiredService<IMinerRepository>();
+            repository.Initialize().Wait();
+           
         }
     }
 }

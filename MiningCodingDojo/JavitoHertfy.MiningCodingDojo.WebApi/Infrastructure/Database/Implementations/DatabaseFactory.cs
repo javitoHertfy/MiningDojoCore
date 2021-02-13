@@ -1,4 +1,7 @@
-﻿using System;
+﻿using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Contracts;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,22 +9,17 @@ using System.Threading.Tasks;
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Implementations
 {
     public class DatabaseFactory : IDatabaseFactory
-    {
-        private readonly IOptionsMonitor<PostDbOptions> iPostDbOptions;
-
-        public DatabaseFactory(IOptionsMonitor<PostDbOptions> iPostDbOptions)
+    {       
+       
+        public IMinerDbContext GetDbContext()
         {
-            this.iPostDbOptions = iPostDbOptions ?? throw new ArgumentNullException(nameof(iPostDbOptions));
-        }
-
-        public IPostDbContext GetDbContext()
-        {
-            var options = new DbContextOptionsBuilder<PostDbContext>()
-                   .UseSqlServer(this.iPostDbOptions.CurrentValue.ConnectionString)
+            var options = new DbContextOptionsBuilder<MinerDbContext>()
+                   .UseInMemoryDatabase(databaseName: "MinerDb")
                    .Options;
 
-            var result = new PostDbContext(options);
+            var result = new MinerDbContext(options);
             return result;
+            
         }
     }
 }
