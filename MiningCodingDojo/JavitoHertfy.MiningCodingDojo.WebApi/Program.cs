@@ -26,10 +26,8 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
 
             using (var scope = host.Services.CreateScope())
             {
-                //3. Get the instance of BoardGamesDBContext in our services layer
                 var services = scope.ServiceProvider;              
 
-                //4. Call the DataGenerator to create sample data
                 DataGenerator.Initialize(services);
             }
 

@@ -1,12 +1,8 @@
 ﻿using JavitoHertfy.MiningCodingDojo.WebApi.Api.Model.Request;
-using JavitoHertfy.MiningCodingDojo.WebApi.Api.Model.Response;
 using JavitoHertfy.MiningCodingDojo.WebApi.Domain.Repository.Contracts;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Contracts;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.DbEntities;
-using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Implementations;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
@@ -25,10 +21,10 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
             this.context = context; 
         }
         [HttpGet]
-        public Task<IActionResult> Get()
+        public async Task<IActionResult> Get()
         {
-            var miners = iMinerRepository.GetAsync();
-            return Task.FromResult<IActionResult>(Ok(miners));
+            var miners = await iMinerRepository.GetAsync();
+            return Ok(miners);
 
         }
 
