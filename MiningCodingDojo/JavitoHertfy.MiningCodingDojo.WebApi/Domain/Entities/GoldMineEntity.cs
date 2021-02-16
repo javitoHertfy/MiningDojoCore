@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Domain.Entities
 {
-    public class GoldMine
+    public class GoldMineEntity
     {
-        public int GoldMiningLeft { get; set; }
+        public int GoldLeft { get; set; }
         public int Difficulty { get; set; }
+        public List<int> MinersLogged { get; set; }
     }
 }

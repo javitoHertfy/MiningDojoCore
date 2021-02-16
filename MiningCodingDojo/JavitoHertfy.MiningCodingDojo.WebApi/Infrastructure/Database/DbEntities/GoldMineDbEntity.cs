@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.DbEntities
 {
@@ -13,7 +9,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.DbEntitie
            
         }
         
-        public int QuantityLeft { get; set; }   
+        public int GoldLeft { get; set; }   
 
         public List<int> MinersLogged { get; set; }
         
