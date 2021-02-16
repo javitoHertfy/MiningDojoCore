@@ -10,7 +10,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Domain.Repository.Contracts
     {
         Task<IEnumerable<MinerEntity>> GetAsync();
 
-        Task<MinerEntity> Insert(MinerEntity minerEntity);
+        Task<int> InsertAsync(MinerEntity minerEntity);
 
         Task<bool> Initialize();
     }

@@ -17,7 +17,8 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Implement
 
         }
 
-        public DbSet<Miner> Miners { get; set; }
+        public DbSet<MinerDbEntity> Miners { get; set; }
+        public DbSet<GoldMineDbEntity> GoldMine { get ; set; }
 
         public async Task<int> SaveContextChangesAsync()
         {

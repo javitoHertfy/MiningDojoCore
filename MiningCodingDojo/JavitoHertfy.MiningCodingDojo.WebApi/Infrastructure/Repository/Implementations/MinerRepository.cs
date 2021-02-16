@@ -27,7 +27,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
         {
             using var context = this.iDatabaseFactory.GetDbContext();
 
-            var miners = await context.Miners.AsQueryable().ToListAsync();            
+            var miners = await context.Miners.AsQueryable().ToListAsync();
 
             var result = miners.Select(miner => this.iMinerEntityMapper.Convert(miner));
             return result;
@@ -40,7 +40,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
                 using var context = this.iDatabaseFactory.GetDbContext();
 
                 context.Miners.AddRange(
-                  new Database.DbEntities.Miner
+                  new Database.DbEntities.MinerDbEntity
                   {
                       Id = 0,
                       Name = "Javito Hertfy",
@@ -54,12 +54,31 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
             {
                 throw;
             }
-            
+
         }
 
-        public Task<MinerEntity> Insert(MinerEntity minerEntity)
+        public async Task<int> InsertAsync(MinerEntity minerEntity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                MinerDbEntity miner = new MinerDbEntity();
+                using var context = this.iDatabaseFactory.GetDbContext();
+                ////Determine the next ID
+                var newID = context.Miners.Select(x => x.Id).Max() + 1;
+                miner.Id = newID;
+                miner.Name = minerEntity.Name;
+                miner.Quantity = minerEntity.Quantity;
+
+                context.Miners.Add(miner);
+                await context.SaveContextChangesAsync();
+                var result = miner.Id;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+           
         }
     }
 }

@@ -10,7 +10,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Mappers.Implementa
 {
     public class MinerEntityMapper : IMinerEntityMapper
     {
-        public MinerEntity Convert(Miner miner)
+        public MinerEntity Convert(MinerDbEntity miner)
         {
            return new MinerEntity()
            {

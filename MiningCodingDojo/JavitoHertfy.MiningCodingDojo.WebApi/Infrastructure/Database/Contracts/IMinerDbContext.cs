@@ -9,7 +9,8 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Contracts
 {
     public interface IMinerDbContext: IDisposable
     {
-        DbSet<Miner> Miners { get; set; }
+        DbSet<GoldMineDbEntity> GoldMine { get; set; }
+        DbSet<MinerDbEntity> Miners { get; set; }
         Task<int> SaveContextChangesAsync();
 
     }

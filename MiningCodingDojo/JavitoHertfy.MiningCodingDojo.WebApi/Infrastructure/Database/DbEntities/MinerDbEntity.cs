@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.DbEntities
 {
-    public partial class Miner
+    public partial class MinerDbEntity
     {
-        public Miner()
+        public MinerDbEntity()
         {
            
         }

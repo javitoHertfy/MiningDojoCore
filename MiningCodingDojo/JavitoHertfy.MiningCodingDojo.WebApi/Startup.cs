@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Extensions;
+using JavitoHertfy.MiningCodingDojo.WebApi.Application.Extensions;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi
 {
@@ -27,7 +28,8 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
                 .AddControllersAsServices();           
 
             services
-                .AddRepository(iConfiguration);
+                .AddRepository(iConfiguration)
+                .AddApplication();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

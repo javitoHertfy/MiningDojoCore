@@ -5,6 +5,6 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Mappers.Contracts
 {
     public interface IMinerEntityMapper
     {
-        public MinerEntity Convert(Miner miner);
+        public MinerEntity Convert(MinerDbEntity miner);
     }
 }
