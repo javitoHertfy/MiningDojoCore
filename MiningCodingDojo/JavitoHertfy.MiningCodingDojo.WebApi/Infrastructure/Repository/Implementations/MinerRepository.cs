@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Implementations
@@ -39,6 +40,13 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
             {
                 using var context = this.iDatabaseFactory.GetDbContext();
 
+                context.GoldMine.Add(new GoldMineDbEntity()
+                {
+                    Id = 0,
+                    GoldLeft = 10000000,
+                    MinersLogged = JsonSerializer.Serialize(new List<int>())
+
+                });
                 context.Miners.AddRange(
                   new Database.DbEntities.MinerDbEntity
                   {

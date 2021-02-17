@@ -18,9 +18,9 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> SignUp(int minerId)
+        public async Task<bool> SignUp(int minerId)
         {
-            iGoldMineRepository.;
+            return await iGoldMineRepository.SignUp(minerId);
         }
     }
 }

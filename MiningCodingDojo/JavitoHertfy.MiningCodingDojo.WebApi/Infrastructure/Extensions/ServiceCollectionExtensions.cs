@@ -17,7 +17,9 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Extensions
             services.AddSingleton<IDatabaseFactory, DatabaseFactory>();
             services.AddSingleton<IMinerDbContext, MinerDbContext>();
             services.AddSingleton<IMinerRepository, MinerRepository>();
+            services.AddSingleton<IGoldMineRepository, GoldMineRepository>();
             services.AddSingleton<IMinerEntityMapper, MinerEntityMapper>();
+            services.AddSingleton<IGoldMineEntityMapper, GoldMineEntityMapper>();
 
             services.AddOptions<MinerDbOptions>();
 

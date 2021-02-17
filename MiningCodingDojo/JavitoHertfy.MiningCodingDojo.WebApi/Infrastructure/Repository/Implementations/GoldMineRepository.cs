@@ -3,6 +3,8 @@ using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Contracts;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Mappers.Contracts;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Text.Json;
+using System.Collections.Generic;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Implementations
 {
@@ -22,10 +24,11 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
         {
             using var context = this.iDatabaseFactory.GetDbContext();
             var goldMine = context.GoldMine.FirstOrDefault();
-
-            if(!goldMine.MinersLogged.Any(x=> x == miner))
+            var minersLoggedList = JsonSerializer.Deserialize<List<int>>(goldMine.MinersLogged);
+            if (!minersLoggedList.Any(x=> x == miner))
             {
-                goldMine.MinersLogged.Add(miner);
+                minersLoggedList.Add(miner);
+                goldMine.MinersLogged = JsonSerializer.Serialize(minersLoggedList);
             }
             else
             {
