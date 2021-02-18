@@ -7,7 +7,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class MinerController : ControllerBase
+    public class MinerController : Controller
     {        
         private IMinerAppService iMinerAppService;
 

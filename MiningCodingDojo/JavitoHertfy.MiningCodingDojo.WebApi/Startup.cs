@@ -24,12 +24,17 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddControllersWithViews()
-                .AddControllersAsServices();           
+                .AddControllers()                
+                .AddControllersAsServices();
+
+            services.AddHttpContextAccessor();
 
             services
                 .AddRepository(iConfiguration)
                 .AddApplication();
+
+            services
+                .AddMvc();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -57,9 +62,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
 
             app.UseSpa(spa =>
