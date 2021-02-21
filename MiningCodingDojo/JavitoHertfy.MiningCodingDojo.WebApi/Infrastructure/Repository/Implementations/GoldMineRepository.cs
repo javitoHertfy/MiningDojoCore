@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Text.Json;
 using System.Collections.Generic;
+using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.DbEntities;
+using System;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Implementations
 {
@@ -64,5 +66,29 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
             }
             throw new System.Exception("No more Gold in the mine");
         }
+
+        public async Task<bool> Initialize()
+        {
+            try
+            {
+                using var context = this.iDatabaseFactory.GetDbContext();
+
+                context.GoldMine.Add(new GoldMineDbEntity()
+                {
+                    Id = 0,
+                    GoldLeft = 10000000,
+                    MinersLogged = JsonSerializer.Serialize(new List<int>())
+
+                });                
+
+                return await context.SaveContextChangesAsync() > 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
     }
 }

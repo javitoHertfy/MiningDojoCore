@@ -15,9 +15,11 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database
         public static void Initialize(IServiceProvider serviceProvider)
         {
 
-            var repository = serviceProvider.GetRequiredService<IMinerRepository>();
-            repository.Initialize().Wait();
-           
+            var minerRepository = serviceProvider.GetRequiredService<IMinerRepository>();
+            minerRepository.Initialize().Wait();
+            var goldMineRepository = serviceProvider.GetRequiredService<IGoldMineRepository>();
+            goldMineRepository.Initialize().Wait();
+
         }
     }
 }

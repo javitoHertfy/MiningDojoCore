@@ -1,5 +1,6 @@
 ﻿using JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Contracts;
 using JavitoHertfy.MiningCodingDojo.WebApi.Domain.Repository.Contracts;
+using System;
 using System.Threading.Tasks;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementation
@@ -7,19 +8,37 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
     public class GoldMineAppService : IGoldMineAppService
     {
         private IGoldMineRepository iGoldMineRepository;
-        
-        public GoldMineAppService(IGoldMineRepository iGoldMineRepository)
+        private IMinerAppService iMinerAppService;
+
+        public GoldMineAppService(IGoldMineRepository iGoldMineRepository, IMinerAppService iMinerAppService)
         {
             this.iGoldMineRepository = iGoldMineRepository;
+            this.iMinerAppService = iMinerAppService;
 
         }
-        public Task<int> Dig(int minerId)
+        public async Task<int> Dig(int minerId)
         {
-            throw new System.NotImplementedException();
+            var miner = await this.iMinerAppService.GetAsync(minerId);
+
+            var random = new Random();
+            int quantity = random.Next(10) / miner.Handicap;
+
+            try
+            {
+                await iGoldMineRepository.SubstractGold(quantity);
+                await iMinerAppService.SaveGoldInMinersPocket(minerId, quantity);
+            }
+            catch(Exception)
+            {
+                throw;
+            }           
+
+            return quantity;
         }
 
         public async Task<bool> SignUp(int minerId)
         {
+            
             return await iGoldMineRepository.SignUp(minerId);
         }
     }

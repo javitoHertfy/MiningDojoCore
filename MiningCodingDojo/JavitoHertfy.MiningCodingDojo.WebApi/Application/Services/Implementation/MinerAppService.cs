@@ -3,6 +3,7 @@ using JavitoHertfy.MiningCodingDojo.WebApi.Domain.Entities;
 using JavitoHertfy.MiningCodingDojo.WebApi.Domain.Repository.Contracts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementation
 {
@@ -15,7 +16,12 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             this.iMinerRepository = iMinerRepository;
         }
 
-
+        public async Task<MinerEntity> GetAsync(int minerId)
+        {
+            var miners = await this.iMinerRepository.GetAsync();
+            var miner = miners.FirstOrDefault(x => x.Id == minerId);
+            return miner;
+        }
         public async Task<IEnumerable<MinerEntity>> GetAsync()
         {
             var miners = await this.iMinerRepository.GetAsync();
@@ -36,9 +42,17 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             return result;
         }
 
-        public Task<bool> SaveGoldInMinersPocket(int minerId, int quantity)
+        public async Task<bool> SaveGoldInMinersPocket(int minerId, int quantity)
         {
-            throw new System.NotImplementedException();
+
+            var miner = await this.GetAsync(minerId);
+            if(miner != null)
+            {               
+                if(miner.IsLogged)
+                    return await this.iMinerRepository.SaveGoldAsync(minerId, quantity);
+                throw new System.Exception($"Miner {minerId} not logged");            }
+
+            return false;
         }
     }
 }

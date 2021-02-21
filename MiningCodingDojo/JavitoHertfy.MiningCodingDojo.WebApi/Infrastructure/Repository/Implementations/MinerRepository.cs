@@ -39,26 +39,19 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
             try
             {
                 using var context = this.iDatabaseFactory.GetDbContext();
-
-                context.GoldMine.Add(new GoldMineDbEntity()
-                {
-                    Id = 0,
-                    GoldLeft = 10000000,
-                    MinersLogged = JsonSerializer.Serialize(new List<int>())
-
-                });
+                
                 context.Miners.AddRange(
                   new Database.DbEntities.MinerDbEntity
                   {
                       Id = 0,
                       Name = "Javito Hertfy",
                       Quantity = 0,
-                      Handicap = 0
+                      Handicap = 1
                   });
 
                 return await context.SaveContextChangesAsync() > 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -86,7 +79,29 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
             {
                 throw;
             }
-           
+
+        }
+
+        public async Task<bool> SaveGoldAsync(int minerId, int quantity)
+        {
+            try
+            {
+                using var context = this.iDatabaseFactory.GetDbContext();
+                ////Determine the next ID
+                var miner = context.Miners.FirstOrDefault(x => x.Id == minerId);
+                if(miner != null)
+                {
+                    miner.Quantity += quantity;
+                    await context.SaveContextChangesAsync();
+                }
+                
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
     }
 }
