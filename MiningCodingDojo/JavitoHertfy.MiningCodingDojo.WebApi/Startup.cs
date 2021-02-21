@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Extensions;
 using JavitoHertfy.MiningCodingDojo.WebApi.Application.Extensions;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi
 {
@@ -28,6 +29,11 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
                 .AddControllersAsServices();
 
             services.AddHttpContextAccessor();
+
+            services
+                .AddSwagger()
+                .AddVersioning();
+
 
             services
                 .AddRepository(iConfiguration)
@@ -55,6 +61,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
                 app.UseExceptionHandler("/Error");
             }
 
+            
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
