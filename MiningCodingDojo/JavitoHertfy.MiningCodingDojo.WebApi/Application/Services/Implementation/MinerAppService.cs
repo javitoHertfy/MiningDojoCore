@@ -34,7 +34,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             {
                 Name = name,
                 Quantity = 0,
-                Handicap = 0,
+                Handicap = 1,
                 IsLogged = false,
             };
 
