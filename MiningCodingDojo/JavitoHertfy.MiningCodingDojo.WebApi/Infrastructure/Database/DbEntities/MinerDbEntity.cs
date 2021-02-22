@@ -14,7 +14,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.DbEntitie
         }
 
         [Key]
-        public int Id { get; set; }    
+        public Guid Id { get; set; }    
         
         [Required]
         [StringLength(200)]

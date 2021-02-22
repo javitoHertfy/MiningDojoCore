@@ -20,7 +20,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
         
         [HttpPost]
         [Route("SignUp/{minerId}")]
-        public async Task<IActionResult> SignUp(int minerId)
+        public async Task<IActionResult> SignUp(Guid minerId)
         {
             var miners = await this.iGoldMineAppService.SignUp(minerId);
             return Ok(miners);
@@ -28,7 +28,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
 
         [HttpPut]
         [Route("Dig/{minerId}")]
-        public async Task<IActionResult> Dig(int minerId)
+        public async Task<IActionResult> Dig(Guid minerId)
         {
             var goldSubstracted = await this.iGoldMineAppService.Dig(minerId);           
             return Ok(goldSubstracted);

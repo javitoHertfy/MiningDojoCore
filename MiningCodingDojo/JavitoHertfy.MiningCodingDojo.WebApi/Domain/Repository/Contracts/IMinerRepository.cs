@@ -10,10 +10,10 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Domain.Repository.Contracts
     {
         Task<IEnumerable<MinerEntity>> GetAsync();
 
-        Task<int> InsertAsync(MinerEntity minerEntity);
+        Task<Guid> InsertAsync(MinerEntity minerEntity);
 
         Task<bool> Initialize();
 
-        Task<bool> SaveGoldAsync(int minerId, int quantity);
+        Task<bool> SaveGoldAsync(Guid minerId, int quantity);
     }
 }

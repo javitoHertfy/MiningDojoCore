@@ -4,6 +4,7 @@ using JavitoHertfy.MiningCodingDojo.WebApi.Domain.Repository.Contracts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using System;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementation
 {
@@ -16,7 +17,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             this.iMinerRepository = iMinerRepository;
         }
 
-        public async Task<MinerEntity> GetAsync(int minerId)
+        public async Task<MinerEntity> GetAsync(Guid minerId)
         {
             var miners = await this.iMinerRepository.GetAsync();
             var miner = miners.FirstOrDefault(x => x.Id == minerId);
@@ -28,7 +29,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             return miners;
         }
 
-        public async Task<int> InsertAsync(string name)
+        public async Task<Guid> InsertAsync(string name)
         {
             MinerEntity miner = new MinerEntity()
             {
@@ -42,7 +43,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             return result;
         }
 
-        public async Task<bool> SaveGoldInMinersPocket(int minerId, int quantity)
+        public async Task<bool> SaveGoldInMinersPocket(Guid minerId, int quantity)
         {
 
             var miner = await this.GetAsync(minerId);

@@ -43,7 +43,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
                 context.Miners.AddRange(
                   new Database.DbEntities.MinerDbEntity
                   {
-                      Id = 0,
+                      Id = new Guid("0b361510-6f7b-43fb-99eb-f7c4b188f10a"),
                       Name = "Javito Hertfy",
                       Quantity = 0,
                       Handicap = 1
@@ -58,14 +58,14 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
 
         }
 
-        public async Task<int> InsertAsync(MinerEntity minerEntity)
+        public async Task<Guid> InsertAsync(MinerEntity minerEntity)
         {
             try
             {
                 MinerDbEntity miner = new MinerDbEntity();
                 using var context = this.iDatabaseFactory.GetDbContext();
                 ////Determine the next ID
-                var newID = context.Miners.Select(x => x.Id).Max() + 1;
+                var newID = Guid.NewGuid();
                 miner.Id = newID;
                 miner.Name = minerEntity.Name;
                 miner.Quantity = minerEntity.Quantity;
@@ -75,14 +75,14 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
                 var result = miner.Id;
                 return result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
 
         }
 
-        public async Task<bool> SaveGoldAsync(int minerId, int quantity)
+        public async Task<bool> SaveGoldAsync(Guid minerId, int quantity)
         {
             try
             {

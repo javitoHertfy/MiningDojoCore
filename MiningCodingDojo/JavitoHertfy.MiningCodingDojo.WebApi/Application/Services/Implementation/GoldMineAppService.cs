@@ -16,7 +16,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             this.iMinerAppService = iMinerAppService;
 
         }
-        public async Task<int> Dig(int minerId)
+        public async Task<int> Dig(Guid minerId)
         {
             var miner = await this.iMinerAppService.GetAsync(minerId);
 
@@ -36,7 +36,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             return quantity;
         }
 
-        public async Task<bool> SignUp(int minerId)
+        public async Task<bool> SignUp(Guid minerId)
         {
             
             return await iGoldMineRepository.SignUp(minerId);

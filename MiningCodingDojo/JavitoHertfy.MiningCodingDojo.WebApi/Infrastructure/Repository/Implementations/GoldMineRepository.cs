@@ -22,11 +22,11 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
             this.iGoldMineEntityMapper = iGoldMineEntityMapper;
         }
 
-        public async Task<bool> SignUp(int miner)
+        public async Task<bool> SignUp(Guid miner)
         {
             using var context = this.iDatabaseFactory.GetDbContext();
             var goldMine = context.GoldMine.FirstOrDefault();
-            var minersLoggedList = JsonSerializer.Deserialize<List<int>>(goldMine.MinersLogged);
+            var minersLoggedList = JsonSerializer.Deserialize<List<Guid>>(goldMine.MinersLogged);
             if (!minersLoggedList.Any(x=> x == miner))
             {
                 minersLoggedList.Add(miner);
@@ -41,11 +41,11 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
             return true;
         }
 
-        public async Task<bool> LogOut(int minerId)
+        public async Task<bool> LogOut(Guid minerId)
         {
             using var context = this.iDatabaseFactory.GetDbContext();
             var goldMine = context.GoldMine.FirstOrDefault();
-            var result = goldMine.MinersLogged.Remove(minerId);
+            //var result = goldMine.MinersLogged.Remove(minerId);
 
             context.GoldMine.Update(goldMine);
 

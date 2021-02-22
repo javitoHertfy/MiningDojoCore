@@ -9,6 +9,6 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Domain.Entities
     {
         public int GoldLeft { get; set; }
         public int Difficulty { get; set; }
-        public List<int> MinersLogged { get; set; }
+        public List<Guid> MinersLogged { get; set; }
     }
 }

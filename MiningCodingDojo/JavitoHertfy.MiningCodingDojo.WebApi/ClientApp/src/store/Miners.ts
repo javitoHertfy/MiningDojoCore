@@ -13,6 +13,7 @@ export interface Miner {
     id: number
     name: string;
     quantity: number;
+    isLogged: string;
 }
 
 // -----------------

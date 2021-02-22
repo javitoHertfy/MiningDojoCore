@@ -25,8 +25,7 @@ class FetchData extends React.PureComponent<WeatherForecastProps> {
     public render() {
         return (
             <React.Fragment>
-                <h1 id="tabelLabel">Weather forecast</h1>
-                <p>This component demonstrates fetching data from the server and working with URL parameters.</p>
+                <h1 id="tabelLabel">Mining Contest Ranking</h1>                
                 {this.renderForecastsTable()}             
             </React.Fragment>
         );
@@ -42,7 +41,8 @@ class FetchData extends React.PureComponent<WeatherForecastProps> {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Quantity</th>                      
+                        <th>Gold mined</th>      
+                        <th>Is Logged</th>      
                     </tr>
                 </thead>
                 <tbody>
@@ -50,6 +50,7 @@ class FetchData extends React.PureComponent<WeatherForecastProps> {
                         <tr key={miner.id}>
                             <td>{miner.name}</td>
                             <td>{miner.quantity}</td>
+                            <td>{miner.isLogged}</td>
                         </tr>
                     )}
                 </tbody>
