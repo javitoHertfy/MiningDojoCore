@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Extensions;
 using JavitoHertfy.MiningCodingDojo.WebApi.Application.Extensions;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using JavitoHertfy.MiningCodingDojo.WebApi.Api.Extensions;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi
 {
@@ -50,7 +51,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
             {
@@ -65,7 +66,8 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            app.UseRouting();
+            app.UseRouting()
+                .UseSwagger(provider);
 
             app.UseEndpoints(endpoints =>
             {
