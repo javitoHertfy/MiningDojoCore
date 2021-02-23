@@ -47,13 +47,18 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
         {
 
             var miner = await this.GetAsync(minerId);
-            if(miner != null)
-            {               
-                if(miner.IsLogged)
-                    return await this.iMinerRepository.SaveGoldAsync(minerId, quantity);
-                throw new System.Exception($"Miner {minerId} not logged");            }
+            if (miner != null)
+            {
+                return await this.iMinerRepository.SaveGoldAsync(minerId, quantity);
+            }
 
             return false;
+        }
+
+        public async Task<bool> SignUp(Guid minerId)
+        {
+            var miner )
+            return await this.iMinerRepository.UpdateAsync(miner);
         }
     }
 }

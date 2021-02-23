@@ -1,6 +1,7 @@
 ﻿using JavitoHertfy.MiningCodingDojo.WebApi.Api.Model.Request;
 using JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
@@ -31,5 +32,12 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
             return Ok(minerId);
         }
 
+        [HttpPost]
+        [Route("SignUp/{minerId}")]
+        public async Task<IActionResult> SignUp(Guid minerId)
+        {
+            var miners = await this.iMinerAppService.UpdateMiner(minerId);
+            return Ok(miners);
+        }
     }
 }

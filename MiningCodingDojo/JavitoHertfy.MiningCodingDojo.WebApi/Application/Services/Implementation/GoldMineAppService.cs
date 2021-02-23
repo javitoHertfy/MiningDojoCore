@@ -18,28 +18,29 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
         }
         public async Task<int> Dig(Guid minerId)
         {
-            var miner = await this.iMinerAppService.GetAsync(minerId);
-
-            var random = new Random();
-            int quantity = random.Next(10) / miner.Handicap;
-
+            int quantity = 0;
             try
             {
-                await iGoldMineRepository.SubstractGold(quantity);
-                await iMinerAppService.SaveGoldInMinersPocket(minerId, quantity);
+                var miner = await this.iMinerAppService.GetAsync(minerId);
+
+                if (miner != null)
+                {
+
+                    throw new System.Exception($"Miner {minerId} not logged");
+                    var random = new Random();
+                    quantity = random.Next(10) / miner.Handicap;
+
+                    await iGoldMineRepository.SubstractGold(quantity);
+                    await iMinerAppService.SaveGoldInMinersPocket(minerId, quantity);
+                }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
-            }           
-
+            }
             return quantity;
         }
 
-        public async Task<bool> SignUp(Guid minerId)
-        {
-            
-            return await iGoldMineRepository.SignUp(minerId);
-        }
+       
     }
 }

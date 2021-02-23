@@ -103,5 +103,29 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
             }
 
         }
+
+        public async Task<bool> UpdateAsync(MinerEntity minerEntity)
+        {
+            try
+            {                
+                using var context = this.iDatabaseFactory.GetDbContext();
+                var miner = context.Miners.FirstOrDefault(x=> x.Id == minerEntity.Id);
+                if(miner != null)
+                {
+                    miner.Handicap = minerEntity.Handicap;
+                    miner.Name = minerEntity.Name;
+                    miner.Quantity = minerEntity.Quantity;
+                    miner.IsLogged = minerEntity.IsLogged;
+                    return await context.SaveContextChangesAsync() > 0;
+                }
+                return false;
+                         
+               
+            }
+            catch (Exception)
+            {
+                throw;
+            };
+        }
     }
 }

@@ -14,7 +14,9 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.DbEntitie
 
         public int GoldLeft { get; set; }   
 
-        public string MinersLogged { get; set; }
+        
+
+       
         
     }
 }

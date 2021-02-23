@@ -5,19 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Mappers.Implementation
 {
     public class GoldMineEntityMapper : IGoldMineEntityMapper
     {
-        public GoldMineEntity Convert(GoldMineDbEntity goldMine)
+        public async Task<GoldMineEntity> Convert(GoldMineDbEntity goldMine)
         {
-            return new GoldMineEntity()
+            return await Task.FromResult(new GoldMineEntity()
             {
                 Difficulty = 0,
                 GoldLeft = goldMine.GoldLeft,
-                MinersLogged = JsonSerializer.Deserialize<List<Guid>>(goldMine.MinersLogged)
-            };
+            });
         }
     }
 }

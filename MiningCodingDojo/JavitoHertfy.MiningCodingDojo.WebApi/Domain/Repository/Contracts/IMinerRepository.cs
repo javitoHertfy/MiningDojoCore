@@ -15,5 +15,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Domain.Repository.Contracts
         Task<bool> Initialize();
 
         Task<bool> SaveGoldAsync(Guid minerId, int quantity);
+
+        Task<bool> UpdateAsync(MinerEntity minerEntity);
     }
 }

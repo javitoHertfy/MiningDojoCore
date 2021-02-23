@@ -9,6 +9,6 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Mappers.Contracts
 {
     public interface IGoldMineEntityMapper
     {
-         GoldMineEntity Convert(GoldMineDbEntity goldMine);
+         Task<GoldMineEntity> Convert(GoldMineDbEntity goldMine);
     }
 }

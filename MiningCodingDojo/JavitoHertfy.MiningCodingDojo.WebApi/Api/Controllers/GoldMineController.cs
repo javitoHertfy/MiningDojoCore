@@ -18,13 +18,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
             this.iGoldMineAppService = iGoldMineAppService;
         }
         
-        [HttpPost]
-        [Route("SignUp/{minerId}")]
-        public async Task<IActionResult> SignUp(Guid minerId)
-        {
-            var miners = await this.iGoldMineAppService.SignUp(minerId);
-            return Ok(miners);
-        }
+       
 
         [HttpPut]
         [Route("Dig/{minerId}")]

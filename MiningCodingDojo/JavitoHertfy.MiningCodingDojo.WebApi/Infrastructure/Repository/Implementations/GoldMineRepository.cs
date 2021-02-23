@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Collections.Generic;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.DbEntities;
 using System;
+using JavitoHertfy.MiningCodingDojo.WebApi.Domain.Entities;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Implementations
 {
@@ -21,38 +22,8 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
             this.iDatabaseFactory = iDatabaseFactory;
             this.iGoldMineEntityMapper = iGoldMineEntityMapper;
         }
-
-        public async Task<bool> SignUp(Guid miner)
-        {
-            using var context = this.iDatabaseFactory.GetDbContext();
-            var goldMine = context.GoldMine.FirstOrDefault();
-            var minersLoggedList = JsonSerializer.Deserialize<List<Guid>>(goldMine.MinersLogged);
-            if (!minersLoggedList.Any(x=> x == miner))
-            {
-                minersLoggedList.Add(miner);
-                goldMine.MinersLogged = JsonSerializer.Serialize(minersLoggedList);
-            }
-            else
-            {
-                throw new System.Exception("Already logged");
-            }
-            context.GoldMine.Update(goldMine);
-            await context.SaveContextChangesAsync();
-            return true;
-        }
-
-        public async Task<bool> LogOut(Guid minerId)
-        {
-            using var context = this.iDatabaseFactory.GetDbContext();
-            var goldMine = context.GoldMine.FirstOrDefault();
-            //var result = goldMine.MinersLogged.Remove(minerId);
-
-            context.GoldMine.Update(goldMine);
-
-            await context.SaveContextChangesAsync();
-            return true;
-        }
-
+              
+       
         public async Task<bool> SubstractGold(int quantity)
         {
             using var context = this.iDatabaseFactory.GetDbContext();
@@ -76,8 +47,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
                 context.GoldMine.Add(new GoldMineDbEntity()
                 {
                     Id = 0,
-                    GoldLeft = 10000000,
-                    MinersLogged = JsonSerializer.Serialize(new List<int>())
+                    GoldLeft = 10000000                    
 
                 });                
 
@@ -90,5 +60,11 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
 
         }
 
+        public async Task<GoldMineEntity> GetGoldMine()
+        {
+            using var context = this.iDatabaseFactory.GetDbContext();
+            return await this.iGoldMineEntityMapper.Convert(context.GoldMine.FirstOrDefault());
+            
+        }
     }
 }

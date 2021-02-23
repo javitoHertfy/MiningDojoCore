@@ -25,5 +25,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.DbEntitie
 
                
         public int Handicap { get; set; }
+
+        public bool IsLogged { get; set; }
     }
 }
