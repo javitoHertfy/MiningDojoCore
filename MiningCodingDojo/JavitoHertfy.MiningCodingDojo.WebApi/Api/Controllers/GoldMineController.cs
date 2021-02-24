@@ -16,8 +16,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
         public GoldMineController(IGoldMineAppService iGoldMineAppService)
         {
             this.iGoldMineAppService = iGoldMineAppService;
-        }
-        
+        }      
        
 
         [HttpPut]

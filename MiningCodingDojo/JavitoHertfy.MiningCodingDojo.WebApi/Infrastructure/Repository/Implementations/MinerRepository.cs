@@ -69,6 +69,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
                 miner.Id = newID;
                 miner.Name = minerEntity.Name;
                 miner.Quantity = minerEntity.Quantity;
+                miner.Handicap = minerEntity.Handicap;
 
                 context.Miners.Add(miner);
                 await context.SaveContextChangesAsync();

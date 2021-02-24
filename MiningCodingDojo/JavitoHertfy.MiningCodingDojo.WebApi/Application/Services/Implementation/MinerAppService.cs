@@ -57,8 +57,14 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
 
         public async Task<bool> SignUp(Guid minerId)
         {
-            var miner )
-            return await this.iMinerRepository.UpdateAsync(miner);
+            var miner = await this.GetAsync(minerId);
+            if (miner != null)
+            {
+                miner.IsLogged = true;
+                return await this.iMinerRepository.UpdateAsync(miner);
+            }
+            return false;
+          
         }
     }
 }

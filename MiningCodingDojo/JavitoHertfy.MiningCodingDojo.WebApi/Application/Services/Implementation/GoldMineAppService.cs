@@ -24,14 +24,16 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
                 var miner = await this.iMinerAppService.GetAsync(minerId);
 
                 if (miner != null)
-                {
+                {                
+                    if(miner.IsLogged)
+                    {
+                        var random = new Random();
+                        quantity = random.Next(10) / miner.Handicap;
 
-                    throw new System.Exception($"Miner {minerId} not logged");
-                    var random = new Random();
-                    quantity = random.Next(10) / miner.Handicap;
-
-                    await iGoldMineRepository.SubstractGold(quantity);
-                    await iMinerAppService.SaveGoldInMinersPocket(minerId, quantity);
+                        await iGoldMineRepository.SubstractGold(quantity);
+                        await iMinerAppService.SaveGoldInMinersPocket(minerId, quantity);
+                    }
+                    throw new Exception("Miner not logged please sign up first");
                 }
             }
             catch (Exception)

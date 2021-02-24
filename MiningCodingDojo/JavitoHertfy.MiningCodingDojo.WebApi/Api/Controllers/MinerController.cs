@@ -36,7 +36,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
         [Route("SignUp/{minerId}")]
         public async Task<IActionResult> SignUp(Guid minerId)
         {
-            var miners = await this.iMinerAppService.UpdateMiner(minerId);
+            var miners = await this.iMinerAppService.SignUp(minerId);
             return Ok(miners);
         }
     }
