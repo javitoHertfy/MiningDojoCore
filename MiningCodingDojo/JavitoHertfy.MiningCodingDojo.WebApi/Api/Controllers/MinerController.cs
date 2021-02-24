@@ -24,6 +24,14 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
 
         }
 
+        [HttpGet("{minerId}")]
+        public async Task<IActionResult> Get(Guid minerId)
+        {
+            var miner = await this.iMinerAppService.GetAsync(minerId);
+            return Ok(miner);
+
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] MinerRequest minerRequest)
         {
