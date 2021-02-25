@@ -18,6 +18,8 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
         }
         public async Task<int> Dig(Guid minerId)
         {
+            FaultyService.ThrowRandomException(2);
+
             int quantity = 0;
             try
             {

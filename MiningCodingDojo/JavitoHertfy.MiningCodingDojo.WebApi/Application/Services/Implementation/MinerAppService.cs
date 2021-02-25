@@ -31,6 +31,8 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
 
         public async Task<Guid> InsertAsync(string name)
         {
+            FaultyService.ThrowRandomException(5);
+
             MinerEntity miner = new MinerEntity()
             {
                 Name = name,
@@ -45,7 +47,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
 
         public async Task<bool> SaveGoldInMinersPocket(Guid minerId, int quantity)
         {
-
+            FaultyService.ThrowRandomException(3);
             var miner = await this.GetAsync(minerId);
             if (miner != null)
             {
@@ -57,8 +59,10 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
 
         public async Task<bool> SignUp(Guid minerId)
         {
+            FaultyService.ThrowRandomException(2);
+
             var miner = await this.GetAsync(minerId);
-            if (miner != null)
+            if (miner != null && !miner.IsLogged)
             {
                 miner.IsLogged = true;
                 return await this.iMinerRepository.UpdateAsync(miner);

@@ -3,15 +3,16 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { ApplicationState } from '../store';
 import * as MinersStore from '../store/Miners';
+import * as GoldMineStore from '../store/GoldMine';
 
 // At runtime, Redux will merge together...
-type WeatherForecastProps =
+type MineProps =
     MinersStore.MinersState // ... state we've requested from the Redux store
-    & typeof MinersStore.actionCreators // ... plus action creators we've requested
-    & RouteComponentProps<{ startDateIndex: string }>; // ... plus incoming routing parameters
+    & typeof MinersStore.actionCreators
+    & GoldMineStore.GoldMineState
+    & typeof GoldMineStore.actionCreators// ... plus action creators we've requested
 
-
-class FetchData extends React.PureComponent<WeatherForecastProps> {
+class FetchData extends React.PureComponent<MineProps> {
     // This method is called when the component is first added to the document
     public componentDidMount() {
         this.ensureDataFetched();
@@ -33,6 +34,7 @@ class FetchData extends React.PureComponent<WeatherForecastProps> {
 
     private ensureDataFetched() {
         this.props.requestMiners();
+        this.props.requestGoldMine();
     }
 
     private renderForecastsTable() {

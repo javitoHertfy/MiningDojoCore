@@ -72,15 +72,20 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
                 miner.Handicap = minerEntity.Handicap;
 
                 context.Miners.Add(miner);
-                await context.SaveContextChangesAsync();
-                var result = miner.Id;
-                return result;
+                var isInserted = await context.SaveContextChangesAsync() > 0;
+                if (isInserted)
+                {
+                    var result = miner.Id;
+                    return result;
+                }
+                throw new Exception("Miner Not Inserted");
             }
             catch (Exception)
             {
                 throw;
             }
 
+            
         }
 
         public async Task<bool> SaveGoldAsync(Guid minerId, int quantity)
@@ -93,15 +98,16 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
                 if(miner != null)
                 {
                     miner.Quantity += quantity;
-                    await context.SaveContextChangesAsync();
-                }
+                    return await context.SaveContextChangesAsync() > 0;
+                }               
                 
-                return true;
             }
             catch (Exception ex)
             {
                 throw;
             }
+
+            return false;
 
         }
 
@@ -117,7 +123,10 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
                     miner.Name = minerEntity.Name;
                     miner.Quantity = minerEntity.Quantity;
                     miner.IsLogged = minerEntity.IsLogged;
-                    return await context.SaveContextChangesAsync() > 0;
+                    int result = await context.SaveContextChangesAsync();
+
+                    return result > 0;
+
                 }
                 return false;
                          
