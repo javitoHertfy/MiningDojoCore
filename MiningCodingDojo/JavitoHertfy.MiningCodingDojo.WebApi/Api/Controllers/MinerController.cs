@@ -47,5 +47,14 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
             var miners = await this.iMinerAppService.SignUp(minerId);
             return Ok(miners);
         }
+
+
+        [HttpPost]
+        [Route("SaveGold/{minerId}")]
+        public async Task<IActionResult> SaveGold(Guid minerId, int quantity)
+        {
+            var miners = await this.iMinerAppService.SaveGoldInMinersPocket(minerId, quantity);
+            return Ok(miners);
+        }
     }
 }

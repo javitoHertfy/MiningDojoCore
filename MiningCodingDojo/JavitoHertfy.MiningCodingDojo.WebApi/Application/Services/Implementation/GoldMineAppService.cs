@@ -30,8 +30,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
                         var random = new Random();
                         quantity = random.Next(10) / miner.Handicap;
 
-                        await iGoldMineRepository.SubstractGold(quantity);
-                        await iMinerAppService.SaveGoldInMinersPocket(minerId, quantity);
+                        await iGoldMineRepository.SubstractGold(quantity);                      
                     }
                     throw new Exception("Miner not logged please sign up first");
                 }
