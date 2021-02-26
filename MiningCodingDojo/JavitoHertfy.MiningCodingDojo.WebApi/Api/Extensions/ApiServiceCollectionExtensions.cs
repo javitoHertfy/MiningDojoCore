@@ -1,4 +1,6 @@
-﻿using JavitoHertfy.MiningCodingDojo.WebApi.Api.Swagger;
+﻿using JavitoHertfy.MiningCodingDojo.WebApi.Api.HostedService;
+using JavitoHertfy.MiningCodingDojo.WebApi.Api.Swagger;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -31,6 +33,12 @@ namespace Microsoft.Extensions.DependencyInjection
                       options.SubstituteApiVersionInUrl = true;
                   });
 
+            return services;
+        }
+
+        public static IServiceCollection AddHostedServices(this IServiceCollection services)
+        {
+            services.AddTransient<IHostedService, LogOutRandomlyService>();
             return services;
         }
     }

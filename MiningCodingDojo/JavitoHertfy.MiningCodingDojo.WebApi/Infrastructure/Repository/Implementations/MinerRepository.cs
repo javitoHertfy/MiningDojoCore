@@ -70,6 +70,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
                 miner.Name = minerEntity.Name;
                 miner.Quantity = minerEntity.Quantity;
                 miner.Handicap = minerEntity.Handicap;
+                miner.IsLogged = minerEntity.IsLogged;
 
                 context.Miners.Add(miner);
                 var isInserted = await context.SaveContextChangesAsync() > 0;

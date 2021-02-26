@@ -38,7 +38,8 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
 
             services
                 .AddRepository(iConfiguration)
-                .AddApplication();
+                .AddApplication()
+                .AddHostedServices();
 
             services
                 .AddMvc();
