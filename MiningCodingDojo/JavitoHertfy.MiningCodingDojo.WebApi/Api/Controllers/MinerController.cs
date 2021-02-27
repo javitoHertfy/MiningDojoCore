@@ -1,5 +1,6 @@
 ﻿using JavitoHertfy.MiningCodingDojo.WebApi.Api.Model.Request;
 using JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Contracts;
+using JavitoHertfy.MiningCodingDojo.WebApi.Domain.CustomExceptions;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -9,12 +10,12 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
     [ApiController]
     [Route("api/[controller]")]
     public class MinerController : Controller
-    {        
+    {
         private IMinerAppService iMinerAppService;
 
         public MinerController(IMinerAppService iMinerAppService)
         {
-            this.iMinerAppService = iMinerAppService;           
+            this.iMinerAppService = iMinerAppService;
         }
         [HttpGet]
         public async Task<IActionResult> Get()
@@ -35,17 +36,40 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] MinerRequest minerRequest)
         {
-           
-            var minerId  = await this.iMinerAppService.InsertAsync(minerRequest.Name);
-            return Ok(minerId);
+            try
+            {
+                var minerId = await this.iMinerAppService.InsertAsync(minerRequest.Name);
+                return Ok(minerId);
+
+            }
+            catch (ServiceUnavailableException)
+            {
+                return StatusCode(503);
+            }
+            catch (UnauthorizedException)
+            {
+                return StatusCode(401);
+            }
+
         }
 
         [HttpPost]
         [Route("SignUp/{minerId}")]
         public async Task<IActionResult> SignUp(Guid minerId)
         {
-            var miners = await this.iMinerAppService.SignUpAsync(minerId);
-            return Ok(miners);
+            try
+            {
+                var miners = await this.iMinerAppService.SignUpAsync(minerId);
+                return Ok(miners);
+            }
+            catch (ServiceUnavailableException)
+            {
+                return StatusCode(503);
+            }
+            catch (UnauthorizedException)
+            {
+                return StatusCode(401);
+            }
         }
 
 
@@ -53,8 +77,19 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
         [Route("SaveGold/{minerId}")]
         public async Task<IActionResult> SaveGold(Guid minerId, int quantity)
         {
-            var miners = await this.iMinerAppService.SaveGoldInMinersPocketAsync(minerId, quantity);
-            return Ok(miners);
+            try
+            {
+                var miners = await this.iMinerAppService.SaveGoldInMinersPocketAsync(minerId, quantity);
+                return Ok(miners);
+            }
+            catch (ServiceUnavailableException)
+            {
+                return StatusCode(503);
+            }
+            catch (UnauthorizedException)
+            {
+                return StatusCode(401);
+            }
         }
     }
 }

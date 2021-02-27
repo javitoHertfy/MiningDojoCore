@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JavitoHertfy.MiningCodingDojo.WebApi.Domain.CustomExceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services
             var faultyNumber = random.Next(0, probability);
             if(faultyNumber == 1)
             {
-                throw new Exception("The API is down, sorry :(");
+                throw new ServiceUnavailableException();
             }
         }
     }

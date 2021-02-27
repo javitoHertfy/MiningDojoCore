@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using System;
+using JavitoHertfy.MiningCodingDojo.WebApi.Domain.CustomExceptions;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementation
 {
@@ -62,7 +63,9 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             var miner = await this.GetAsync(minerId);
             if (miner != null)
             {
-                return await this.iMinerRepository.SaveGoldAsync(minerId, quantity);
+                if(miner.IsLogged)
+                    return await this.iMinerRepository.SaveGoldAsync(minerId, quantity);
+                throw new UnauthorizedException();
             }
 
             return false;

@@ -1,4 +1,5 @@
 ﻿using JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Contracts;
+using JavitoHertfy.MiningCodingDojo.WebApi.Domain.CustomExceptions;
 using JavitoHertfy.MiningCodingDojo.WebApi.Domain.Repository.Contracts;
 using System;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
 
                         await iGoldMineRepository.SubstractGold(quantity);                      
                     }
-                    throw new Exception("Miner not logged please sign up first");
+                    throw new UnauthorizedException();
                 }
             }
             catch (Exception)
