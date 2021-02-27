@@ -45,7 +45,18 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             return result;
         }
 
-        public async Task<bool> SaveGoldInMinersPocket(Guid minerId, int quantity)
+        public async Task LogOutAsync(Guid minerId)
+        {
+            var miner = await this.GetAsync(minerId);
+            if (miner != null)
+            {
+                miner.IsLogged = false;
+                await this.iMinerRepository.UpdateAsync(miner);
+            }
+           
+        }
+
+        public async Task<bool> SaveGoldInMinersPocketAsync(Guid minerId, int quantity)
         {
             FaultyService.ThrowRandomException(3);
             var miner = await this.GetAsync(minerId);
@@ -57,7 +68,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             return false;
         }
 
-        public async Task<bool> SignUp(Guid minerId)
+        public async Task<bool> SignUpAsync(Guid minerId)
         {
             FaultyService.ThrowRandomException(2);
 

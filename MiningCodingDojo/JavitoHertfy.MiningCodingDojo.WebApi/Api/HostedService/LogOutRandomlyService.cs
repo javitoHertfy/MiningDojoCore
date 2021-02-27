@@ -1,12 +1,20 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Contracts;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.HostedService
 {
     public class LogOutRandomlyService : IHostedService
     {
+        private readonly IMinerAppService iMinerAppService;
+        public LogOutRandomlyService(IMinerAppService iMinerAppService)
+        {
+            this.iMinerAppService = iMinerAppService;
+        }
+
         private Timer timer;
         private const int secondsToExecute = 10;
 
@@ -27,7 +35,17 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.HostedService
 
         private void SignUpRandomly(object state)
         {
-            Console.WriteLine("Executed");
+            var miners = this.iMinerAppService.GetAsync().Result.ToList();
+            var numberOfMiners = miners.Count();
+            if(numberOfMiners > 0)
+            {
+                var random = new Random();
+                var minerToBeLoggedOut = random.Next(0, numberOfMiners - 1);
+
+                var miner = miners[minerToBeLoggedOut];
+
+                iMinerAppService.LogOutAsync(miner.Id).Wait();
+            }
         }
     }
 }

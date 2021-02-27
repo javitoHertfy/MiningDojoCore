@@ -44,7 +44,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
         [Route("SignUp/{minerId}")]
         public async Task<IActionResult> SignUp(Guid minerId)
         {
-            var miners = await this.iMinerAppService.SignUp(minerId);
+            var miners = await this.iMinerAppService.SignUpAsync(minerId);
             return Ok(miners);
         }
 
@@ -53,7 +53,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
         [Route("SaveGold/{minerId}")]
         public async Task<IActionResult> SaveGold(Guid minerId, int quantity)
         {
-            var miners = await this.iMinerAppService.SaveGoldInMinersPocket(minerId, quantity);
+            var miners = await this.iMinerAppService.SaveGoldInMinersPocketAsync(minerId, quantity);
             return Ok(miners);
         }
     }
