@@ -46,7 +46,8 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
                       Id = new Guid("0b361510-6f7b-43fb-99eb-f7c4b188f10a"),
                       Name = "Javito Hertfy",
                       Quantity = 0,
-                      Handicap = 1
+                      Handicap = 1,
+                      IsLogged = false
                   });
 
                 return await context.SaveContextChangesAsync() > 0;

@@ -35,7 +35,8 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
 
                         await iGoldMineRepository.SubstractGold(quantity);                      
                     }
-                    throw new UnauthorizedException();
+                    else
+                        throw new UnauthorizedException();
                 }
             }
             catch (Exception)

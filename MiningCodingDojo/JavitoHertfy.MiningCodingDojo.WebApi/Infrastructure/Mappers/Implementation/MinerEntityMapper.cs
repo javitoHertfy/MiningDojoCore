@@ -17,7 +17,8 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Mappers.Implementa
                 Id = miner.Id,
                 Handicap = miner.Handicap,
                 Name = miner.Name,
-                Quantity = miner.Quantity
+                Quantity = miner.Quantity,
+                IsLogged = miner.IsLogged
                 
            };
         }
