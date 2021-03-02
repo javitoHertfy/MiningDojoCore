@@ -12,7 +12,7 @@ type MineProps =
     & GoldMineStore.GoldMineState
     & typeof GoldMineStore.actionCreators// ... plus action creators we've requested
 
-class FetchData extends React.PureComponent<MineProps> {
+class MinersFetchData extends React.PureComponent<MineProps> {
     // This method is called when the component is first added to the document
     public componentDidMount() {
         this.ensureDataFetched();
@@ -33,8 +33,7 @@ class FetchData extends React.PureComponent<MineProps> {
     }
 
     private ensureDataFetched() {
-        this.props.requestMiners();
-        this.props.requestGoldMine();
+        this.props.requestMiners();       
     }
 
     private renderForecastsTable() {
@@ -65,4 +64,4 @@ class FetchData extends React.PureComponent<MineProps> {
 export default connect(
     (state: ApplicationState) => state.miners, // Selects which state properties are merged into the component's props
     MinersStore.actionCreators // Selects which action creators are merged into the component's props
-)(FetchData as any);
+)(MinersFetchData as any);
