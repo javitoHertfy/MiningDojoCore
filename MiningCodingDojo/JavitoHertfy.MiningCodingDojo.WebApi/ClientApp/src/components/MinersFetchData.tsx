@@ -15,14 +15,12 @@ type MineProps =
 class MinersFetchData extends React.PureComponent<MineProps> {
     // This method is called when the component is first added to the document
     public componentDidMount() {
-        this.ensureDataFetched();
+        this.ensureDataFetched()
+        setInterval(() => this.ensureDataFetched(), 5000);
     }
 
     // This method is called when the route parameters change
-    public componentDidUpdate() {
-        this.ensureDataFetched();
-    }
-
+  
     public render() {
         return (
             <React.Fragment>

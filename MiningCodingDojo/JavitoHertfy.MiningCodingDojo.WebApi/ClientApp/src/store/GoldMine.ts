@@ -39,7 +39,7 @@ export const actionCreators = {
     requestGoldMine: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
-        if (appState && appState.goldMine) {
+        if (appState && appState.goldMine) {            
             fetch(`api/goldmine`)
                 .then(response => response.json() as Promise<GoldMine>)
                 .then(data => {

@@ -13,12 +13,8 @@ type GoldMineProps =
 class GoldMineFetchData extends React.PureComponent<GoldMineProps> {
     // This method is called when the component is first added to the document
     public componentDidMount() {
-        this.ensureDataFetched();
-    }
-
-    // This method is called when the route parameters change
-    public componentDidUpdate() {
-        this.ensureDataFetched();
+        this.ensureDataFetched()
+        setInterval(() => this.ensureDataFetched(), 5000);
     }
 
     public render() {
