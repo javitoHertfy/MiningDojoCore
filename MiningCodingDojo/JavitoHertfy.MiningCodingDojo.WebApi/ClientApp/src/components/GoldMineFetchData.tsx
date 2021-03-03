@@ -4,6 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { ApplicationState } from '../store';
 import * as GoldMineStore from '../store/GoldMine';
 
+
 // At runtime, Redux will merge together...
 type GoldMineProps =  
     GoldMineStore.GoldMineState
@@ -22,9 +23,8 @@ class GoldMineFetchData extends React.PureComponent<GoldMineProps> {
 
     public render() {
         return (
-            <React.Fragment>
-                <h1 id="tabelLabel">Mining Contest Ranking</h1>                
-                {this.renderForecastsTable()}             
+            <React.Fragment>                             
+                {this.renderGoldMine()}             
             </React.Fragment>
         );
     }
@@ -33,21 +33,9 @@ class GoldMineFetchData extends React.PureComponent<GoldMineProps> {
         this.props.requestGoldMine();
     }
 
-    private renderForecastsTable() {
+    private renderGoldMine() {
         return (
-            <table className='table table-striped' aria-labelledby="tabelLabel">
-                <thead>
-                    <tr>
-                        <th>Gold Left</th>                              
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr key={this.props.goldMine.id}>
-                        <td> {this.props.goldMine.goldLeft}</td>                       
-                    </tr>
-                   
-                </tbody>
-            </table>
+            <div className="goldMine">Gold Mine Left: {this.props.goldMine.goldLeft}</div>          
         );
     }
    

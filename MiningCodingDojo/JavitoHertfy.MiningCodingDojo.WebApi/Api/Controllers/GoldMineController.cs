@@ -17,8 +17,15 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
         public GoldMineController(IGoldMineAppService iGoldMineAppService)
         {
             this.iGoldMineAppService = iGoldMineAppService;
-        }      
-       
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var miners = await this.iGoldMineAppService.GetAsync();
+            return Ok(miners);
+
+        }
 
         [HttpPut]
         [Route("Dig/{minerId}")]

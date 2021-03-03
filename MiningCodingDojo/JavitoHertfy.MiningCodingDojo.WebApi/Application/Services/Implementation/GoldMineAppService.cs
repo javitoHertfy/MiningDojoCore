@@ -46,6 +46,17 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             return quantity;
         }
 
+        public async Task<Domain.Entities.GoldMineEntity> GetAsync()
+        {   
+            try
+            {
+                return await iGoldMineRepository.GetGoldMine();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
        
+        }
     }
 }

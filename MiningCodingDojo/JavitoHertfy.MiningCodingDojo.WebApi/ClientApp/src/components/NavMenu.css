@@ -4,7 +4,13 @@
     word-break: break-all;
 }
 
-html { font-size: 14px; }
+goldMine{
+    text-align: right
+}
+
+html {
+    font-size: 14px;
+}
 
 @media (min-width: 768px) {
     html { font-size: 16px; }

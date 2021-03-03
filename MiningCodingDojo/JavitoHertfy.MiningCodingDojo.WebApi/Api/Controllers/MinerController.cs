@@ -53,7 +53,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("SignUp/{minerId}")]
         public async Task<IActionResult> SignUp(Guid minerId)
         {
@@ -73,7 +73,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPut]
         [Route("SaveGold/{minerId}")]
         public async Task<IActionResult> SaveGold(Guid minerId, int quantity)
         {
