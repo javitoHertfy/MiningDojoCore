@@ -63,8 +63,11 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             var miner = await this.GetAsync(minerId);
             if (miner != null)
             {
-                if(miner.IsLogged)
-                    return await this.iMinerRepository.SaveGoldAsync(minerId, quantity);
+                if (miner.IsLogged)
+                    if (LedgerChecker.LastQuantityOfGoldDiggedByMiner.ContainsKey(minerId) && LedgerChecker.LastQuantityOfGoldDiggedByMiner[minerId] == quantity)
+                        return await this.iMinerRepository.SaveGoldAsync(minerId, quantity);
+                    else
+                        throw new TryingToStealException($"Miner {minerId} is trying to cheat, next time you will be dicualified");
                 throw new UnauthorizedException();
             }
 

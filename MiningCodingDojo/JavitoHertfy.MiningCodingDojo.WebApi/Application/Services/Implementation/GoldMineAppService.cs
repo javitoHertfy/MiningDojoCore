@@ -33,7 +33,12 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
                         var random = new Random();
                         quantity = random.Next(10) / miner.Handicap;
 
-                        await iGoldMineRepository.SubstractGold(quantity);                      
+                        await iGoldMineRepository.SubstractGold(quantity);
+
+                        if (LedgerChecker.LastQuantityOfGoldDiggedByMiner.ContainsKey(minerId))
+                            LedgerChecker.LastQuantityOfGoldDiggedByMiner[minerId] = quantity;
+                        else
+                            LedgerChecker.LastQuantityOfGoldDiggedByMiner.Add(minerId, quantity);
                     }
                     else
                         throw new UnauthorizedException();

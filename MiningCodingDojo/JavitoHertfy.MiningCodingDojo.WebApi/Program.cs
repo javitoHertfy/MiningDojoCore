@@ -1,3 +1,4 @@
+using JavitoHertfy.MiningCodingDojo.WebApi.Application.Services;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Contracts;
 using JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Database.Implementations;
@@ -31,6 +32,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
                 DataGenerator.Initialize(services);
             }
 
+            LedgerChecker.LastQuantityOfGoldDiggedByMiner = new Dictionary<Guid, int>();
 
             host.Run();
         }
