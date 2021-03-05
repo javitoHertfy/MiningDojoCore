@@ -1,0 +1,32 @@
+# MininigCodingDojo.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mining-codingdojo-webapi
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: mining-codingdojo-webapi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mining-codingdojo-webapi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mining-codingdojo-webapi
+  template:
+    metadata:
+      labels:
+        app: mining-codingdojo-webapi
+    spec:
+      containers:
+      - name: mining-codingdojo-webapi
+        image: javierhertfelder/javitohertfyminingcodingdojowebapi:latest
+        ports:
+        - containerPort: 8080

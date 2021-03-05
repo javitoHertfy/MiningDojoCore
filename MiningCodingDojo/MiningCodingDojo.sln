@@ -5,7 +5,12 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JavitoHertfy.MiningCodingDojo.WebApi", "JavitoHertfy.MiningCodingDojo.WebApi\JavitoHertfy.MiningCodingDojo.WebApi.csproj", "{E903BAE6-98EF-45DB-872E-F54D10C2E89B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JavitoHertfy.MiningCodingDojo.Client", "JavitoHertfy.MiningCodingDojo.Client\JavitoHertfy.MiningCodingDojo.Client.csproj", "{285979EE-F584-4460-881D-6E554BB74583}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JavitoHertfy.MiningCodingDojo.Client", "JavitoHertfy.MiningCodingDojo.Client\JavitoHertfy.MiningCodingDojo.Client.csproj", "{285979EE-F584-4460-881D-6E554BB74583}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{1BFE1911-37EF-412E-9652-9EF5D97D9A41}"
+	ProjectSection(SolutionItems) = preProject
+		Deployment\MininigCodingDojo.yaml = Deployment\MininigCodingDojo.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
