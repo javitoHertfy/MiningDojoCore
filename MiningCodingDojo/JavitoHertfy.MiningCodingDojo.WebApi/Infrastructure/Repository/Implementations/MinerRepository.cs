@@ -28,7 +28,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Infrastructure.Repository.Impleme
         {
             using var context = this.iDatabaseFactory.GetDbContext();
 
-            var miners = await context.Miners.AsQueryable().ToListAsync();
+            var miners = await context.Miners.AsQueryable().OrderByDescending(x => x.Quantity).ToListAsync();
 
             var result = miners.Select(miner => this.iMinerEntityMapper.Convert(miner));
             return result;
