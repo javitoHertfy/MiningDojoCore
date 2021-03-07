@@ -44,8 +44,7 @@ export const actionCreators = {
         if (appState && appState.miners) {            
             fetch(`api/miner`)
                 .then(response => response.json() as Promise<Miner[]>)
-                .then(data => {
-                    debugger
+                .then(data => {                    
                     dispatch({ type: 'RECEIVE_MINERS', miners: data });
                 });
 

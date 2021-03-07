@@ -4,8 +4,12 @@
     word-break: break-all;
 }
 
-goldMine{
-    text-align: right
+div.gold{
+    align-content: stretch;
+    color: red;
+    text-align: center;
+    
+        
 }
 
 html {

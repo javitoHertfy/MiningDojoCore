@@ -31,7 +31,7 @@ class GoldMineFetchData extends React.PureComponent<GoldMineProps> {
 
     private renderGoldMine() {
         return (
-            <div className="goldMine">Gold Mine Left: {this.props.goldMine.goldLeft}</div>          
+            <div className="div gold">Gold Mine Left: {this.props.goldMine.goldLeft}</div>          
         );
     }
    
