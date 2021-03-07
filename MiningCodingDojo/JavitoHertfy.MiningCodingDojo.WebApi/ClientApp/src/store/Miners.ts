@@ -13,7 +13,7 @@ export interface Miner {
     id: number
     name: string;
     quantity: number;
-    isLogged: string;
+    isLogged: boolean;
 }
 
 // -----------------
@@ -41,11 +41,11 @@ export const actionCreators = {
     requestMiners: (): AppThunkAction<KnownAction> => (dispatch, getState) => {
         // Only load data if it's something we don't already have (and are not already loading)
         const appState = getState();
-        if (appState && appState.miners) {
-            
+        if (appState && appState.miners) {            
             fetch(`api/miner`)
                 .then(response => response.json() as Promise<Miner[]>)
                 .then(data => {
+                    debugger
                     dispatch({ type: 'RECEIVE_MINERS', miners: data });
                 });
 

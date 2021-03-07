@@ -49,7 +49,7 @@ class MinersFetchData extends React.PureComponent<MineProps> {
                         <tr key={miner.id}>
                             <td>{miner.name}</td>
                             <td>{miner.quantity}</td>
-                            <td>{miner.isLogged}</td>
+                            <td>{miner.isLogged ? 'Yes' : 'No'}</td>
                         </tr>
                     )}
                 </tbody>
