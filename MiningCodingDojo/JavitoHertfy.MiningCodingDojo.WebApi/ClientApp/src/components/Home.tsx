@@ -15,7 +15,7 @@ const Home = () => (
       <li>Create a Miner</li>
       <li>Sign Up into the mine</li>
       <li>Dig into the mine</li>
-      <li>Save the gold in your miner pocket</li>
+      <li>Save the gold in your miner's pocket</li>
     </ul>  
   </div>
 );
