@@ -61,6 +61,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi
             else
             {
                 app.UseExceptionHandler("/Error");
+             
             }
 
             

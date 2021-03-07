@@ -65,7 +65,11 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Implementati
             {
                 if (miner.IsLogged)
                     if (LedgerChecker.LastQuantityOfGoldDiggedByMiner.ContainsKey(minerId) && LedgerChecker.LastQuantityOfGoldDiggedByMiner[minerId] == quantity)
-                        return await this.iMinerRepository.SaveGoldAsync(minerId, quantity);
+                    {
+                        await this.iMinerRepository.SaveGoldAsync(minerId, quantity) ;
+                        LedgerChecker.LastQuantityOfGoldDiggedByMiner[minerId] = 0;
+                        return true;
+                    }                        
                     else
                         throw new TryingToStealException($"Miner {minerId} is trying to cheat, next time you will be dicualified");
                 throw new UnauthorizedException();

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Extensions
 {
@@ -12,6 +13,8 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Extensions
             app.UseSwaggerUI(
                 options =>
                 {
+                   
+                    options.SupportedSubmitMethods(new SubmitMethod[] { SubmitMethod.Get});
                     for (int i = provider.ApiVersionDescriptions.Count - 1; i >= 0; i--)
                     {
                         var description = provider.ApiVersionDescriptions[i];

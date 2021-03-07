@@ -1,6 +1,7 @@
 ﻿using JavitoHertfy.MiningCodingDojo.WebApi.Api.Model.Request;
 using JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Contracts;
 using JavitoHertfy.MiningCodingDojo.WebApi.Domain.CustomExceptions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -33,6 +34,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
 
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] MinerRequest minerRequest)
         {
@@ -53,6 +55,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
 
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         [HttpPut]
         [Route("SignUp/{minerId}")]
         public async Task<IActionResult> SignUp(Guid minerId)
@@ -72,7 +75,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
             }
         }
 
-
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         [HttpPut]
         [Route("SaveGold/{minerId}")]
         public async Task<IActionResult> SaveGold(Guid minerId, int quantity)

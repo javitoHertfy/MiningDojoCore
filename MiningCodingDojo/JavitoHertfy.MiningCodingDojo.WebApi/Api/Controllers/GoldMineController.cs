@@ -1,5 +1,6 @@
 ﻿using JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Contracts;
 using JavitoHertfy.MiningCodingDojo.WebApi.Domain.CustomExceptions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
 
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(int))]
         [HttpPut]
         [Route("Dig/{minerId}")]
         public async Task<IActionResult> Dig(Guid minerId)
