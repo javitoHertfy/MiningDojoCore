@@ -1,9 +1,11 @@
 ﻿using JavitoHertfy.MiningCodingDojo.WebApi.Api.Model.Request;
 using JavitoHertfy.MiningCodingDojo.WebApi.Application.Services.Contracts;
 using JavitoHertfy.MiningCodingDojo.WebApi.Domain.CustomExceptions;
+using JavitoHertfy.MiningCodingDojo.WebApi.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
@@ -18,6 +20,8 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
         {
             this.iMinerAppService = iMinerAppService;
         }
+
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<MinerEntity>))]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -26,6 +30,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.Controllers
 
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(MinerEntity))]
         [HttpGet("{minerId}")]
         public async Task<IActionResult> Get(Guid minerId)
         {
