@@ -16,7 +16,7 @@ namespace JavitoHertfy.MiningCodingDojo.WebApi.Api.HostedService
         }
 
         private Timer timer;
-        private const int secondsToExecute = 30;
+        private const int secondsToExecute = 5;
 
         public Task StartAsync(CancellationToken cancellationToken)
         {           
