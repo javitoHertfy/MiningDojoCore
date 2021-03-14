@@ -11,8 +11,7 @@ namespace JavitoHertfy.MiningCodingDojo.Client
 {
     public class Program
     {
-        private static string minerId = "0b361510-6f7b-43fb-99eb-f7c4b188f10a";
-        private static int totalQuantity = 0;
+        private static string minerId = "0b361510-6f7b-43fb-99eb-f7c4b188f10a";      
         static void Main(string[] args)
         {  
             var client = new RestClient("http://mining.azurewebsites.net/");
