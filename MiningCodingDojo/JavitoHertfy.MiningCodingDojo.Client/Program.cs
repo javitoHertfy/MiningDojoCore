@@ -14,11 +14,7 @@ namespace JavitoHertfy.MiningCodingDojo.Client
         private static string minerId = "0b361510-6f7b-43fb-99eb-f7c4b188f10a";
         private static int totalQuantity = 0;
         static void Main(string[] args)
-        {
-          
-            var shouldContinue = true;
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+        {  
             var client = new RestClient("http://mining.azurewebsites.net/");
             SignUp(client);           
 
@@ -27,17 +23,10 @@ namespace JavitoHertfy.MiningCodingDojo.Client
                 var quantity = Mine(client);
                 if (quantity > 0)
                 {
-                    Save(client, quantity);
-                    totalQuantity += quantity;
-                }
-                if (totalQuantity > 500)
-                {
-                    stopwatch.Stop();
-                    shouldContinue = false;
-                    Console.WriteLine($"It took {stopwatch.ElapsedMilliseconds} to mine 500");
-                }
+                    Save(client, quantity);                    
+                }                
 
-            } while (shouldContinue);
+            } while (true);
 
         }       
         private static bool SignUp(RestClient client)
